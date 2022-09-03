@@ -65,13 +65,13 @@ const displayCategoryDetails = (sameCategories) => {
                                     <img src="${category.author.img}" class="rounded-circle" style="width: 50px">
                                 </div>
                                 <div class="ms-2">
-                                    <p>${category.author.name ? category.author.name : 'no data found'}</p>
+                                    <p>${category.author.name ? category.author.name : 'No data found'}</p>
                                     <p>${category.author.published_date}</p>
                                 </div>
                             </div>
                             <div class="d-flex align-items-center">
                                 <p><i class="fa-regular fa-eye"></i></p>
-                                <p class="ms-1">${category.total_view ? category.total_view : 'Not Found'}</p>
+                                <p class="ms-1">${category.total_view ? category.total_view : 'No data found'}</p>
                             </div>
                             <div></div>
                             <div></div>
