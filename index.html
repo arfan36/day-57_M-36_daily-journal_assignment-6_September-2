@@ -15,9 +15,9 @@
     <script src="https://kit.fontawesome.com/e61df7a87d.js" crossorigin="anonymous"></script>
 </head>
 
-<body class="container">
+<body>
     <!------------------------------------------------------ header -->
-    <header>
+    <header class="container">
         <nav class="navbar navbar-expand-lg bg-light">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#"><span class="bg-primary text-white p-1 rounded">Daily</span>
@@ -44,7 +44,7 @@
 
     </header>
     <!-------------------------------------------------------- main -->
-    <main>
+    <main class="container">
         <!-- News Categories -->
         <section class="">
             <div id="news-category" class="d-flex justify-content-between flex-wrap">
@@ -52,6 +52,20 @@
             </div>
         </section>
 
+        <!-- Number of news item in Categories -->
+        <section id="news-number">
+
+        </section>
+
+         <!-- loader or spinner -->
+        <section id="loader" class="d-none">
+            <div style="height: 400px;" class="d-flex justify-content-center align-items-center">
+                <div class="spinner-border text-success" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        </section>
+        
         <!-- News Container -->
         <section id="news-container">
         </section>
@@ -77,8 +91,8 @@
         </section>
     </main>
     <!------------------------------------------------------ footer -->
-    <footer>
-
+    <footer class="text-center bg-black text-white">
+        <p class="p-4"><small>Copyright 2021 © Daily Journal</small></p>
     </footer>
 
     <!-- Custom JavaScript -->

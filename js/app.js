@@ -3,7 +3,7 @@
 // ------------------------------------------ load categories
 const loadCategory = async () => {
     try {
-        const url = `https://openapi.programming-hero.com/api/news/categories`;
+        let url = `https://openapi.programming-hero.com/api/news/categories`;
         const res = await fetch(url);
         const data = await res.json();
         displayCategories(data.data.news_category);
@@ -12,11 +12,12 @@ const loadCategory = async () => {
         console.log(error);
     }
 };
-
+console.log();
 const displayCategories = (categories) => {
     const newsCategory = document.getElementById('news-category');
     categories.forEach(category => {
-        // console.log(category.category_id);
+        // console.log(category.category_name);
+
 
         const div = document.createElement('div');
         div.innerHTML = `
@@ -25,15 +26,33 @@ const displayCategories = (categories) => {
         </div>
         `;
         newsCategory.appendChild(div);
+
     });
 };
 loadCategory();
 
-// ---------------------------------------------- load category details container
+// loader or spinner
+const toggleLoader = isLoading => {
+    const loaderSection = document.getElementById('loader');
+    if (isLoading) {
+        loaderSection.classList.remove('d-none');
+    }
+    else {
+        loaderSection.classList.add('d-none');
+
+    }
+};
+
+
+// --------------------------------------- load category details container
 const categoryDetails = async (categoryId) => {
     // console.log(categoryId);
+
+    // start spinner
+    toggleLoader(true);
+
     try {
-        const url = `https://openapi.programming-hero.com/api/news/category/0${categoryId}`;
+        let url = `https://openapi.programming-hero.com/api/news/category/0${categoryId}`;
         const res = await fetch(url);
         const data = await res.json();
         displayCategoryDetails(data.data);
@@ -46,6 +65,19 @@ const categoryDetails = async (categoryId) => {
 const displayCategoryDetails = (sameCategories) => {
     const newsContainer = document.getElementById('news-container');
     newsContainer.textContent = '';
+
+
+    // number of news item in categories
+    const newsQuantitySection = document.getElementById('news-number');
+    newsQuantitySection.textContent = '';
+    // console.log(sameCategories.length);
+    newsQuantitySection.innerHTML = `
+        <div class="text-center fs-3 bg-secondary text-white">
+            ${sameCategories.length ? sameCategories.length + ' items found' : 'No News Found'} 
+        </div>
+    `;
+
+
     sameCategories.forEach(category => {
         // console.log(category._id);
         const div = document.createElement('div');
@@ -83,13 +115,17 @@ const displayCategoryDetails = (sameCategories) => {
         `;
         newsContainer.appendChild(div);
     });
+
+    // stop spinner
+    toggleLoader(false);
+
 };
 // categoryDetails();
 
 // ---------------------------------------------------- item details
 const itemDetails = async (newsId) => {
     // console.log(newsId);
-    const url = `https://openapi.programming-hero.com/api/news/${newsId}`;
+    let url = `https://openapi.programming-hero.com/api/news/${newsId}`;
     try {
         const res = await fetch(url);
         const data = await res.json();
