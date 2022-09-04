@@ -62,6 +62,16 @@ const categoryDetails = async (categoryId) => {
     }
 };
 
+// sortingFunction
+function sortingFunction(sameCategories, isTrues) {
+    if (isTrues) {
+        sameCategories.sort((a, b) => b.total_view - a.total_view);
+    }
+    else {
+        sameCategories.sort((a, b) => a.total_view - b.total_view);
+    }
+}
+
 const displayCategoryDetails = (sameCategories) => {
     const newsContainer = document.getElementById('news-container');
     newsContainer.textContent = '';
@@ -77,9 +87,13 @@ const displayCategoryDetails = (sameCategories) => {
         </div>
     `;
 
+    // sorting categories by view
+    document.getElementById('most-view').onclick = sortingFunction(sameCategories, true);
+    // document.getElementById('least-view').onclick = sortingFunction(sameCategories, false);
 
     sameCategories.forEach(category => {
-        // console.log(category._id);
+        // console.log(category);
+
         const div = document.createElement('div');
         div.innerHTML = `
         <div onclick="itemDetails('${category._id}')" class="card mb-3" style="max-width: auto;" data-bs-toggle="modal" data-bs-target="#exampleModal">
