@@ -16,8 +16,6 @@ console.log();
 const displayCategories = (categories) => {
     const newsCategory = document.getElementById('news-category');
     categories.forEach(category => {
-        // console.log(category.category_name);
-
 
         const div = document.createElement('div');
         div.innerHTML = `
@@ -46,7 +44,6 @@ const toggleLoader = isLoading => {
 
 // --------------------------------------- load category details container
 const categoryDetails = async (categoryId) => {
-    // console.log(categoryId);
 
     // start spinner
     toggleLoader(true);
@@ -62,15 +59,6 @@ const categoryDetails = async (categoryId) => {
     }
 };
 
-// sortingFunction
-function sortingFunction(sameCategories, isTrues) {
-    if (isTrues) {
-        sameCategories.sort((a, b) => b.total_view - a.total_view);
-    }
-    else {
-        sameCategories.sort((a, b) => a.total_view - b.total_view);
-    }
-}
 
 const displayCategoryDetails = (sameCategories) => {
     const newsContainer = document.getElementById('news-container');
@@ -80,19 +68,15 @@ const displayCategoryDetails = (sameCategories) => {
     // number of news item in categories
     const newsQuantitySection = document.getElementById('news-number');
     newsQuantitySection.textContent = '';
-    // console.log(sameCategories.length);
     newsQuantitySection.innerHTML = `
         <div class="text-center fs-3 bg-secondary text-white">
             ${sameCategories.length ? sameCategories.length + ' items found' : 'No News Found'} 
         </div>
     `;
 
-    // sorting categories by view
-    document.getElementById('most-view').onclick = sortingFunction(sameCategories, true);
-    // document.getElementById('least-view').onclick = sortingFunction(sameCategories, false);
+    sameCategories.sort((a, b) => b.total_view - a.total_view);
 
     sameCategories.forEach(category => {
-        // console.log(category);
 
         const div = document.createElement('div');
         div.innerHTML = `
@@ -134,11 +118,9 @@ const displayCategoryDetails = (sameCategories) => {
     toggleLoader(false);
 
 };
-// categoryDetails();
 
 // ---------------------------------------------------- item details
 const itemDetails = async (newsId) => {
-    // console.log(newsId);
     let url = `https://openapi.programming-hero.com/api/news/${newsId}`;
     try {
         const res = await fetch(url);
@@ -150,7 +132,6 @@ const itemDetails = async (newsId) => {
     }
 };
 const displayItemDetails = (itemDetail) => {
-    // console.log(itemDetail);
     const modalDetail = document.getElementById('news-details');
     modalDetail.textContent = '';
     const div = document.createElement('div');
